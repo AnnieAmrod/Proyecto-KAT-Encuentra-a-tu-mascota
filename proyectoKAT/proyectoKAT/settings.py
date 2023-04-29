@@ -78,13 +78,30 @@ WSGI_APPLICATION = 'proyectoKAT.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'katdb',
+        'USER': 'miriam',
+        'PASSWORD': 'miriamd',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        
+    }
+}
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 
 # Password validation
@@ -105,7 +122,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "usuario.Usuario"
+#Configurar autenticación utilizando el modelo predeterminado de Django
+AUTH_USER_MODEL = 'usuario.Usuario'
+
+
+LOGIN_URL = '/login/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
