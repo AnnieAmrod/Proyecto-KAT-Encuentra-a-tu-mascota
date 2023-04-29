@@ -11,6 +11,12 @@ class Especie(models.Model):
     descripcion = models.TextField(verbose_name='Descripcion', max_length=255, null=True, blank=True)
     imagen = models.ImageField(verbose_name='Imagen', null=True, blank=True)
 
+    class Meta:
+        verbose_name_plural = "Especies"
+
+    def __str__(self):
+        return self.nombre
+
 
 class Raza(models.Model):
     nombre = models.CharField(max_length=25, verbose_name='Nombre', unique=True, null=False, blank=False)
@@ -29,6 +35,12 @@ class Raza(models.Model):
 #    actividad = models.CharField(max_length=1, choices=nivel_actividad_choices, default='M', null=False, blank=False) #Será un desplegable
     actividad = models.CharField(max_length=5, verbose_name='Nivel de Actividad', null=False, blank=False)
     temperamento = models.CharField(max_length=20, verbose_name='Temperamento', null=False, blank=False)
+
+    class Meta:
+        verbose_name_plural = "Razas"
+
+    def __str__(self):
+        return self.nombre
 
 
 class MLost(models.Model):
@@ -50,6 +62,12 @@ class MLost(models.Model):
     collar = models.BooleanField(default=False)
     devuelto = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name_plural = "Mascotas Perdidas"
+
+    def __str__(self):
+        return self.nombre
+
 
 class MFind(models.Model):
     nombre = models.CharField(max_length=25, verbose_name='Nombre', null=True, blank=True)
@@ -68,8 +86,15 @@ class MFind(models.Model):
     collar = models.BooleanField(default=False)
     devuelto = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name_plural = "Mascotas encontradas"
+
+    def __str__(self):
+        return self.nombre
+
 
 class Aviso(models.Model):
+    razon = models.CharField(max_length=20, verbose_name='Razón', blank=False, null=False)
     tipo_aviso = models.CharField(max_length=20, verbose_name='Tipo de aviso', blank=False, null=False)
     fecha_aviso = models.DateField(default=now, verbose_name='Fecha de aviso', blank=False, null=False)
     hora_aviso = models.TimeField(default=now, verbose_name='Hora de aviso', blank=False, null=False)
@@ -77,5 +102,11 @@ class Aviso(models.Model):
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE, verbose_name='Provincia', blank=False, null=False)
     ciudad = models.CharField(max_length=30, verbose_name='Ciudad', blank=False, null=False)
     imagen = models.CharField(max_length=80, verbose_name='Imagen', blank=False, null=False)
+    descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=True, blank=True)
     contacto = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Contacto', blank=False, null=False)
 
+    class Meta:
+        verbose_name_plural = "Avisos"
+
+    def __str__(self):
+        return self.nombre
