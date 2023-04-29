@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     #Aplicaciones propias
     'common',
+    'usuario',
 ]
 
 MIDDLEWARE = [
@@ -103,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "usuario.Usuario"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
