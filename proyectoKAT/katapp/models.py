@@ -47,7 +47,7 @@ class MLost(models.Model):
     nombre = models.CharField(max_length=25, verbose_name='Nombre', null=False, blank=False)
     especie = models.ForeignKey(Especie, verbose_name='Especie', on_delete=models.CASCADE, null=False, blank=False)
     lugar_perdida = models.CharField(max_length=255, verbose_name='Lugar Pérdida', null=False, blank=False)
-    foto = models.CharField(max_length=80, verbose_name='Foto', null=False, blank=False) #TODO Comprobar si debe ser tipo CharField o tipo ImageField
+    foto = models.ImageField(max_length=80, verbose_name='Foto', null=False, blank=False)
     descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=False, blank=False)
     color = models.ManyToManyField(Color, verbose_name='Color', related_name='mlosts_colors')
     sexo = models.CharField(max_length=1, verbose_name='Sexo', blank=True, null=True)
@@ -63,6 +63,7 @@ class MLost(models.Model):
     devuelto = models.BooleanField(default=False)
 
     class Meta:
+        verbose_name = "Mascota Perdida"
         verbose_name_plural = "Mascotas Perdidas"
 
     def __str__(self):
@@ -73,7 +74,7 @@ class MFind(models.Model):
     nombre = models.CharField(max_length=25, verbose_name='Nombre', null=True, blank=True)
     especie = models.ForeignKey(Especie, verbose_name='Especie', on_delete=models.CASCADE, null=False, blank=False)
     lugar_encontrado = models.CharField(max_length=255, verbose_name='Lugar Encontrado', null=False, blank=False)
-    foto = models.CharField(max_length=80, verbose_name='Foto', null=False, blank=False) #TODO Comprobar si debe ser tipo CharField o tipo ImageField
+    foto = models.ImageField(max_length=80, verbose_name='Foto', null=False, blank=False)
     descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=False, blank=False)
     color = models.ManyToManyField(Color, verbose_name='Color', related_name='mfinds_colors')
     sexo = models.CharField(max_length=1, verbose_name='Sexo', blank=True, null=True)
@@ -87,6 +88,7 @@ class MFind(models.Model):
     devuelto = models.BooleanField(default=False)
 
     class Meta:
+        verbose_name = "Mascota encontrada"
         verbose_name_plural = "Mascotas encontradas"
 
     def __str__(self):
@@ -102,7 +104,7 @@ class Aviso(models.Model):
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE, verbose_name='Provincia', blank=False, null=False)
     ciudad = models.CharField(max_length=30, verbose_name='Ciudad', blank=False, null=False)
     imagen = models.CharField(max_length=80, verbose_name='Imagen', blank=False, null=False)
-    descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=True, blank=True)
+    descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=False, blank=False)
     contacto = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Contacto', blank=False, null=False)
 
     class Meta:
