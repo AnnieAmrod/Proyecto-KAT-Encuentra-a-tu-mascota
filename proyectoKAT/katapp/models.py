@@ -3,6 +3,7 @@ from common.models import Provincia, Color
 from usuario.models import Usuario
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.timezone import now
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Especie(models.Model):
@@ -48,7 +49,8 @@ class MLost(models.Model):
     especie = models.ForeignKey(Especie, verbose_name='Especie', on_delete=models.CASCADE, null=False, blank=False)
     lugar_perdida = models.CharField(max_length=255, verbose_name='Lugar Pérdida', null=False, blank=False)
     foto = models.ImageField(max_length=80, verbose_name='Foto', null=False, blank=False)
-    descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=False, blank=False)
+    #descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=False, blank=False)
+    descripcion = RichTextField(verbose_name='Descripción', null=False, blank=False)
     color = models.ManyToManyField(Color, verbose_name='Color', related_name='mlosts_colors')
     sexo = models.CharField(max_length=1, verbose_name='Sexo', blank=True, null=True)
     anio_nacimiento = models.CharField(max_length=4, verbose_name='Año de nacimiento', blank=True, null=True)
