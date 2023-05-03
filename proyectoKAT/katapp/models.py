@@ -25,9 +25,10 @@ class Raza(models.Model):
     imagen = models.ImageField(verbose_name='Imagen', null=True, blank=True)
     especie = models.ForeignKey(Especie, verbose_name='Especie', on_delete=models.CASCADE, null=False, blank=False)
     origen = models.CharField(max_length=25, verbose_name='Origen', null=True, blank=True)
-    peso_medio = models.DecimalField(max_digits=4, decimal_places=2, verbose_name='Peso Promedio', null=True, blank=True)
-    altura_media = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Altura Promedio', null=True, blank=True)
-    longevidad = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(40)], verbose_name='Esperanza de vida', null=True, blank=True) #Longevidad máxima de los gatos --> 38 años (perros --> 29 años)
+    peso_medio = models.DecimalField(max_digits=5, decimal_places=3, verbose_name='Peso Promedio', null=True, blank=True)
+    altura_media = models.DecimalField(max_digits=3, decimal_places=1, verbose_name='Altura Promedio', null=True, blank=True)
+    #longevidad = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(40)], verbose_name='Esperanza de vida', null=True, blank=True) #Longevidad máxima de los gatos --> 38 años (perros --> 29 años)
+    longevidad = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Esperanza de vida', null=True, blank=True) #Longevidad máxima de los gatos --> 38 años (perros --> 29 años)
 #    nivel_actividad_choices = [
 #        ('A', 'Alto'),
 #        ('M', 'Medio'),
