@@ -15,7 +15,7 @@ class Provincia(models.Model):
 
 class Color(models.Model):
     nombre = models.CharField(max_length=50, verbose_name="Nombre del color", unique=True, null=False, blank=False)
-    codigo_hexadecimal = models.CharField(max_length=7, verbose_name="Código hexadecimal del color", unique=True, null=False, blank=False)
+    codigo_hexadecimal = models.CharField(max_length=7, verbose_name="Código hexadecimal del color", null=False, blank=False)
     descripcion = models.TextField(max_length=255, verbose_name="Descripción del color", null=True, blank=True)
 
     class Meta:
