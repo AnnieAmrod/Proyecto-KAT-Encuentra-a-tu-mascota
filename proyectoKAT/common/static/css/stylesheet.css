@@ -1,0 +1,75 @@
+/*
+    FF64F5 Textos destacados y enlaces
+    8C2986 Títulos
+    #592356 Hover Botones
+    #FFC4FC Fondos destacados
+*/
+*{
+    font-family: 'Arimo', sans-serif;
+}
+
+div.container-fluid.fondo{
+    background-color: #FFC4FC;
+    padding: 0 auto;
+    margin: 0 auto;
+}
+
+header{
+    background-color: #8C2986;
+    z-index: 3;
+}
+
+header.menu{
+    background-color: #FFC4FC;
+}
+
+.btn{
+    background-color: #8C2986;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.btn:hover{
+    color: #8C2986;
+    border-color: #8C2986;
+}
+
+.btn-inicio{
+    background-color: #000000;
+}
+
+a.nav-link{
+    padding: 15px;
+    margin-left: 25px;
+}
+
+header.menu a.nav-link{
+    padding: 15px;
+    margin-left: 25px;
+    color: #592356;
+}
+
+div#navbarNav.collapse.navbar-collapse{
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.card-overlay {
+    position: relative;
+    z-index: 1;
+}
+
+.carousel {
+    position: relative;
+    z-index: 0;
+}
+
+footer{
+    background-color: #8C2986;
+    margin-top: 5%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 3;
+}

@@ -1,0 +1,65 @@
+{% extends 'common/base_katapp.html' %}
+
+{% block content %}
+<div class="container-fluid fondo">
+    <!-- Carrousel -->
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://picsum.photos/id/237/1100/400" class="d-block w-100" alt="Perro negro">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/40/1100/400" class="d-block w-100" alt="Trufa de gato detalle">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/169/1100/400" class="d-block w-100" alt="Perros purgándose con hierba">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/1062/1100/400" class="d-block w-100" alt="Pug metido en una manta">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/1012/1100/400" class="d-block w-100" alt="Perro con su dueño en el campo">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/837/1100/400" class="d-block w-100" alt="Bulldog relamiéndose">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/1025/1100/400" class="d-block w-100" alt="Carlino metido en una manta">
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="row mt-5 card-overlay justify-content-center">
+        <div class="top-50 w-25">
+            <div class="card translate-middle-y">
+                <i class="fa-sharp fa-regular fa-circle fa-4x mx-auto pt-3"></i>
+                <div class="card-body text-center">
+                    <h5 class="card-title">PERDIDA</h5>
+                    <a href="#" class="btn btn-inicio">Publicar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class=" top-50 w-25">
+            <div class="card translate-middle-y">
+                <i class="fa-sharp fa-regular fa-circle fa-4x mx-auto pt-3"></i>
+                <div class="card-body text-center">
+                    <h5 class="card-title">ENCONTRADA</h5>
+                    <a href="#" class="btn btn-inicio">Publicar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="top-50 w-25">
+            <div class="card translate-middle-y">
+                <i class="fa-sharp fa-regular fa-circle fa-4x mx-auto pt-3"></i>
+                <div class="card-body text-center">
+                    <h5 class="card-title">ALERTA</h5>
+                    <a href="#" class="btn btn-inicio">Publicar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
