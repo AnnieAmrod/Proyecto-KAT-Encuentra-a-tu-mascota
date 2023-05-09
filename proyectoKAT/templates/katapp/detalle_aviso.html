@@ -1,0 +1,26 @@
+{% extends 'common/base_katapp.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        {% if aviso.imagen %}
+        <div class="col-md-4">
+            <img src="{{ aviso.imagen.url }}" alt="{{ aviso.tipo_aviso }}" class="img-fluid rounded">
+        </div>
+        {% endif %}
+        <div class="col-md-4">
+            <h2>{{ aviso.tipo_aviso }}</h2>
+            <p><strong>Razón:</strong> {{ aviso.razon }}</p>
+            <p><strong>Fecha:</strong> {{ aviso.fecha_aviso }} {{ aviso.hora_aviso }}</p>
+            <p><strong>Ubicación:</strong> {{ aviso.ubicacion }}</p>
+            <p><strong>Ciudad:</strong> {{ aviso.ciudad }} ({{ aviso.provincia }})</p>
+            <p><strong>Descripción:</strong> {{ aviso.descripcion }}</p>
+        </div>
+        <div class="col-md-4 d-flex flex-column">
+            <div class="mt-auto">
+                <a href="{% url 'aviso' %}" class="btn btn-block">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

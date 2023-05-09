@@ -1,0 +1,36 @@
+{% extends 'common/base_katapp.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        {% if mascota.foto %}
+        <div class="col-md-4 mb-3">
+            <img src="{{ mascota.foto.url }}" class="img-fluid rounded">
+        </div>
+        {% endif %}
+        <div class="col-md-4">
+            <h2>{{ mascota.nombre }}</h2>
+            <p><strong>Especie:</strong> {{ mascota.especie }}</p>
+            <p><strong>Raza:</strong> {{ mascota.raza }}</p>
+            <p><strong>Lugar/Mapa:</strong> {{ mascota.lugar_perdida }}</p>
+            <p><strong>Peso:</strong> {{ mascota.peso }}</p>
+            <p><strong>Collar:</strong> {% if mascota.collar %}Si{% else %}No{% endif %}</p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Num. Chip:</strong> {% if mascota.num_chip %}{{mascota.num_chip}}{% else %}Desconocido{% endif %}</p>
+            <p><strong>Tamaño:</strong> {{ mascota.tamano }}</p>
+            <p><strong>Pelo:</strong> {{ mascota.pelo }}</p>
+            <p><strong>Color:</strong>
+            {% for color in mascota.color.all %}
+                {{ color }}
+            {% endfor %}
+            </p>
+            <strong>Sexo:</strong> {% if mascota.sexo == 'H' %}Hembra{% else %}Macho{% endif %}</p>        </p>
+            <p><strong>Año nacimiento:</strong> {{ mascota.anio_nacimiento }}</p>
+            <p><strong>Descripción:</strong> {{ mascota.descripcion|safe }}</p>
+            <a href="#" class="btn">Contacto</a>
+            <a href="{% url 'm_encontrada' %}" class="btn">Volver</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

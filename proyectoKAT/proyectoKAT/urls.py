@@ -17,13 +17,20 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from common import views
+from common import views as common_views
+from katapp import views as  katapp_views
 
 urlpatterns = [
 path('admin/', admin.site.urls),
-path('', views.HomeView.as_view(), name='home'),
-path('home/', views.HomeView.as_view(), name='home'),
-path('panel/', views.PanelView.as_view(), name='panel'),
+path('', common_views.HomeView.as_view(), name='home'),
+path('home/', common_views.HomeView.as_view(), name='home'),
+path('panel/', common_views.PanelView.as_view(), name='panel'),
+path('m_perdida/', katapp_views.MPerdidaListView.as_view(), name='m_perdida'),
+path('m_perdidadetail/<int:id>/', katapp_views.MPerdidaDetailView.as_view(), name='m_perdidadetail'),
+path('m_encontrada/', katapp_views.MEncontradaListView.as_view(), name='m_encontrada'),
+path('m_encontradadetail/<int:id>/', katapp_views.MEncontradaDetailView.as_view(), name='m_encontradadetail'),
+path('aviso/', katapp_views.AvisoListView.as_view(), name='aviso'),
+path('avisodetail/<int:id>/', katapp_views.AvisoDetailView.as_view(), name='avisodetail'),
 ]
 
 if settings.DEBUG: urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

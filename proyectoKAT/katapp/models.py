@@ -49,7 +49,7 @@ class MLost(models.Model):
     nombre = models.CharField(max_length=25, verbose_name='Nombre', null=False, blank=False)
     especie = models.ForeignKey(Especie, verbose_name='Especie', on_delete=models.CASCADE, null=False, blank=False)
     lugar_perdida = models.CharField(max_length=255, verbose_name='Lugar Pérdida', null=False, blank=False)
-    foto = models.ImageField(max_length=80, verbose_name='Foto', null=False, blank=False)
+    foto = models.ImageField(max_length=80, verbose_name='Foto', null=False, blank=False, upload_to='m_lost_fotos/')
     #descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=False, blank=False)
     descripcion = RichTextField(verbose_name='Descripción', null=False, blank=False)
     color = models.ManyToManyField(Color, verbose_name='Color', related_name='mlosts_colors')
@@ -77,8 +77,8 @@ class MFind(models.Model):
     nombre = models.CharField(max_length=25, verbose_name='Nombre', null=True, blank=True)
     especie = models.ForeignKey(Especie, verbose_name='Especie', on_delete=models.CASCADE, null=False, blank=False)
     lugar_encontrado = models.CharField(max_length=255, verbose_name='Lugar Encontrado', null=False, blank=False)
-    foto = models.ImageField(max_length=80, verbose_name='Foto', null=False, blank=False)
-    descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=False, blank=False)
+    foto = models.ImageField(max_length=80, verbose_name='Foto', null=False, blank=False, upload_to='m_lost_fotos/')
+    descripcion = RichTextField(verbose_name='Descripción', null=False, blank=False)
     color = models.ManyToManyField(Color, verbose_name='Color', related_name='mfinds_colors')
     sexo = models.CharField(max_length=1, verbose_name='Sexo', blank=True, null=True)
     raza = models.ForeignKey(Raza, verbose_name='Raza', on_delete=models.CASCADE, null=True, blank=True)
@@ -95,7 +95,10 @@ class MFind(models.Model):
         verbose_name_plural = "Mascotas encontradas"
 
     def __str__(self):
-        return self.nombre
+        if self.nombre:
+            return self.nombre
+        else:
+            return self.especie.nombre+" "+self.raza.nombre+" sin nombre"
 
 
 class Aviso(models.Model):
@@ -106,7 +109,7 @@ class Aviso(models.Model):
     ubicacion = models.CharField(max_length=255, verbose_name='Ubicación', blank=False, null=False)
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE, verbose_name='Provincia', blank=False, null=False)
     ciudad = models.CharField(max_length=30, verbose_name='Ciudad', blank=False, null=False)
-    imagen = models.CharField(max_length=80, verbose_name='Imagen', blank=False, null=False)
+    imagen = models.ImageField(max_length=80, verbose_name='Imagen', null=False, blank=False, upload_to='m_lost_fotos/')
     descripcion = models.TextField(max_length=255, verbose_name='Descripción', null=False, blank=False)
     contacto = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Contacto', blank=False, null=False)
 
@@ -114,4 +117,4 @@ class Aviso(models.Model):
         verbose_name_plural = "Avisos"
 
     def __str__(self):
-        return self.nombre
+        return self.razon

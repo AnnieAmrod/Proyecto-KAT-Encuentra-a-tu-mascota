@@ -1,0 +1,68 @@
+{% extends 'common/base_katapp.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <h2>Filtros</h2>
+            <hr>
+            <h4>Especie</h4>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="perro">
+                <label class="form-check-label" for="perro">
+                    Perro
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="gato">
+                <label class="form-check-label" for="gato">
+                    Gato
+                </label>
+            </div>
+            <hr>
+            <h4>Ubicación</h4>
+            <div class="form-group">
+                <label for="ubicacion">Introduce una ubicación:</label>
+                <input type="text" class="form-control" id="ubicacion">
+            </div>
+            <hr>
+            <h4>Estado</h4>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="encontrada">
+                <label class="form-check-label" for="encontrada">
+                    Encontrada
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="perdida">
+                <label class="form-check-label" for="perdida">
+                    Perdida
+                </label>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                {% if avisos %}
+                    {% for aviso in avisos %}
+                        <div class="col-md-4 mb-3">
+                            <a href="{% url 'avisodetail' id=aviso.id %}">
+                                <div class="card">
+                                    {% if aviso.imagen %}
+                                        <img src="{{ aviso.imagen.url }}" class="card-img-top" alt="{{ aviso.razon }}">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ aviso.razon }}</h5>
+                                        <p class="card-text">{{ aviso.descripcion|safe }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No se han encontrado avisos</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

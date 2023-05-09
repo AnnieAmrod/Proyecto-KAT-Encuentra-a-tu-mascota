@@ -1,13 +1,15 @@
 {% extends 'common/base.html' %}
 
+{% load static %}
+
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <img src="{{ MEDIA_URL }}kat_logo_final.png" alt="Logo" class="img-fluid d-block mx-auto mb-4">
+            <img src="{% static 'kat_logo_final.png' %}" alt="Logo" class="img-fluid d-block mx-auto mb-4">
             <div class="d-flex justify-content-between">
                 <a href="#" class="btn btn-lg mr-4">Iniciar sesión</a>
-                <a href="#" class="btn btn-lg">Entrar como invitado</a>
+                <a href="{% url 'panel' %}" class="btn btn-lg">Entrar como invitado</a>
             </div>
         </div>
     </div>
