@@ -31,6 +31,10 @@ path('m_encontrada/', katapp_views.MEncontradaListView.as_view(), name='m_encont
 path('m_encontradadetail/<int:id>/', katapp_views.MEncontradaDetailView.as_view(), name='m_encontradadetail'),
 path('aviso/', katapp_views.AvisoListView.as_view(), name='aviso'),
 path('avisodetail/<int:id>/', katapp_views.AvisoDetailView.as_view(), name='avisodetail'),
+path('conocenos', common_views.ConocenosView.as_view(), name='conocenos'),
+path('m_perdida_create/', katapp_views.MLostCreateView.as_view(), name='m_perdida_create'), #Para crear elementos (CBV)
+path('m_perdida_update/<int:pk>/', katapp_views.MLostUpdateView.as_view(), name='m_perdida_update'),
+path('m_perdida_delete/<int:pk>/', katapp_views.MLostDeleteView.as_view(), name='m_perdida_delete'),
 ]
 
 if settings.DEBUG: urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

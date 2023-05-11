@@ -8,3 +8,6 @@ class HomeView(TemplateView):
 
 class PanelView(TemplateView):
     template_name = 'common/panel_inicio.html'
+
+class ConocenosView(TemplateView):
+    template_name = 'common/conocenos.html'

@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 from .models import MLost, MFind, Aviso
+from django.views.generic.edit import CreateView, UpdateView, DeleteView #Para crear, actualizar y eliminar elementos (CBV)
+from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin #Importar para que salgan los mensajes
 
 # Create your views here.
 #!------------------------------------------ MASCOTAS PERDIDAS ---------------------------------------
@@ -96,3 +99,31 @@ class AvisoDetailView(TemplateView):
         aviso_id = kwargs.get('id')
         context['aviso'] = Aviso.objects.get(id=aviso_id)
         return context
+
+#!----------------------------------------- FORMULARIO CREAR M_LOST ---------------------------------------
+class MLostCreateView(SuccessMessageMixin, CreateView):
+    model = MLost
+    fields = ['nombre', 'especie', 'lugar_perdida', 'foto', 'descripcion', 'color', 'sexo', 'anio_nacimiento', 'raza', 'fecha_extravio', 'datos_contacto', 'tamano', 'peso', 'num_chip', 'pelo', 'collar', 'devuelto']
+    success_message = "Mascota creada exitosamente"
+    def get_success_message(self, cleaned_data):
+        return self.success_message + ' - ' + str(self.object)
+    #---------------------------- Modificar la vista para que redireccione correctamente al crear un proyecto
+        #Reverse lazy hace que, mediante el nombre, obtengamos la estructura de la url que queremos redireccionar
+    def get_success_url(self):
+        object = self.object
+        return reverse_lazy('m_perdida_update', kwargs={'pk': object.id})
+
+#!--------------------------------------- FORMULARIO MODIFICAR  M_FIND -------------------------------------
+
+class MLostUpdateView(SuccessMessageMixin, UpdateView):
+    model = MLost
+    fields = ['nombre', 'especie', 'lugar_perdida', 'foto', 'descripcion', 'color', 'sexo', 'anio_nacimiento', 'raza', 'fecha_extravio', 'datos_contacto', 'tamano', 'peso', 'num_chip', 'pelo', 'collar', 'devuelto']
+    def get_success_message(self, cleaned_data):
+        return "Mascota '{}' actualizada exitosamente".format(str(self.object))
+    success_url = reverse_lazy('m_perdida')
+
+#!----------------------------------------- FORMULARIO BORRAR M_FIND ---------------------------------------
+class MLostDeleteView(DeleteView):
+    model = MLost
+    success_url = reverse_lazy('m_perdida')
+    template_name = 'katapp/mlost_confirm_delete.html'
