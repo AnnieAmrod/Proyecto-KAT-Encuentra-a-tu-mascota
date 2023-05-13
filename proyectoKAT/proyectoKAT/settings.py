@@ -172,8 +172,8 @@ CKEDITOR_CONFIGS = {
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],
         ],
-        'width': '210px',
-        'height': '200px',
+        'width': '235px',
+        'height': '280px',
     }
 }
 

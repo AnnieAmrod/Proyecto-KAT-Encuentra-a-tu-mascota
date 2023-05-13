@@ -104,13 +104,13 @@
 
 
             <hr>
-            <div class="mb-3">
+            <div class="mb-3 enlace-img">
                 {{ form.foto.errors }}
                 <label for="{{ form.foto.id_for_label }}">Imagen</label>
                 {{ form.foto }}
             </div>
             <div class="row">
-                <div class="col-4">
+                <div>
                     <input type="submit" class="btn" value="{{object|yesno:'Actualizar,Crear'}}" >
                     {% if object %}
                         <a class="btn" role="button" href="{% url 'm_perdida_delete' object.id %}"> Eliminar </a>

@@ -28,10 +28,17 @@ header.menu a.nav-link{
     color: #592356;
 }
 
-@media (min-width: 992px){
-    .navbar-expand-lg .navbar-nav .nav-link {
-        padding-left: 35px;
-        padding-right: 35px;
+@media (min-width: 1400px){
+    .navbar-expand-xl .navbar-nav .nav-link {
+            padding-left: 35px;
+            padding-right: 35px;
+    }
+}
+
+@media (max-width: 1300px){
+    .navbar-expand-xl .navbar-nav .nav-link {
+        padding-left: 25px;
+        padding-right: 25px;
     }
 }
 
@@ -77,8 +84,8 @@ div#navbarNav.collapse.navbar-collapse{
 }
 
 #id_color{
-    height: 130px;
-    width: 210px;
+    height: 180px;
+    width: 235px;
 }
 
 #cke_1_contents{
@@ -88,6 +95,8 @@ div#navbarNav.collapse.navbar-collapse{
 input{
     color: #FF64F5;
     border-color: #FFC4FC;
+    padding: 6px 12px;
+    border-radius: 0.375rem;
 }
 
 input:focus, select:focus{
@@ -111,13 +120,32 @@ input::placeholder{
 }
 
 select{
-    color: #8C2986;
+    color: #FF64F5;
     border: 2px inset #FFC4FC;
+    padding: 6px 12px;
+    border-radius: 0.375rem;
+}
+
+option{
+    color: #8C2986;
 }
 
 option:checked{
     background-color: #FF64F5;
     color: #FFFFFF;
+}
+
+option:hover{
+    background-color: #8C2986;
+    color: #FFFFFF;
+}
+
+label{
+    margin-bottom: 8px;
+}
+
+input#id_collar, input#id_devuelto{
+    accent-color: #8C2986;
 }
 
 div.cke_inner.cke_reset{
@@ -131,6 +159,10 @@ div.cke_inner.cke_reset{
 
 a:link, a:visited, a:active {
     text-decoration:none;
+}
+
+.enlace-img a{
+    color: #FF64F5;
 }
 
 footer{
