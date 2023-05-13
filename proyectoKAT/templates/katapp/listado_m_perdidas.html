@@ -40,19 +40,24 @@
                 </label>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 pb-5">
+            <h1>Listado de mascotas perdidas</h1>
             <div class="row">
                 {% if mascotas %}
                     {% for mascota in mascotas %}
                         <div class="col-md-4 mb-3">
                             <a href="{% url 'm_perdida_update' pk=mascota.id %}">
-                                <div class="card">
+                                <div class="card lostfind">
                                     {% if mascota.foto %}
                                         <img src="{{ mascota.foto.url }}" class="card-img-top" alt="{{ mascota.nombre }}">
                                     {% endif %}
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ mascota.nombre }}</h5>
-                                        <p class="card-text">{{ mascota.descripcion|safe }}</p>
+                                    <div class="card-body lostfind">
+                                        <h2 class="card-title h5">{{ mascota.nombre }}</h5>
+                                        {% if mascota.descripcion|length > 70 %}
+                                        <p class="card-text">{{ mascota.descripcion|safe|slice:":70" }}...</p>
+                                        {% else %}
+                                        <p class="card-text">{{ mascota.descripcion|safe|slice:":70" }}</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </a>

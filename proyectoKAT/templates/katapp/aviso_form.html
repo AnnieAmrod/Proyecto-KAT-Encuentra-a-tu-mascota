@@ -1,0 +1,16 @@
+{% extends 'common/base_katapp.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Para crear elementos -->
+    <h2>{{object|yesno:'Modificar aviso,Creación de un nuevo aviso'}}</h2>
+    <form method="post" enctype="multipart/form-data" novalidate>{% crispy form %}
+        <input type="submit" class="btn mr-2" value="{{object|yesno:'Modificar,Crear'}}" >
+        {% if object %}
+        <a class="btn" role="button" href="{% url 'aviso_delete' object.id %}"> Eliminar </a>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

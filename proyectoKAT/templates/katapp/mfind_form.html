@@ -1,0 +1,114 @@
+{% extends 'common/base_katapp.html' %}
+
+
+{% block content %}
+<div class="container py-5">
+    <!-- Para crear elementos -->
+    <h2>{{object|yesno:'Actualizar información de mascota encontrada,Creación de una nueva mascota encontrada'}}</h2>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <!-- csrf_token es para hacer más segura la aplicación ante un posible robo de token (cross-site-scripting)(man-in-the-middle) -->
+        
+        {{ form.non_field_errors }}
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-6 mb-3">
+                    {{ form.nombre.errors }}
+                    <label for="{{ form.nombre.id_for_label }}">Nombre</label> <br>
+                    {{ form.nombre }}
+                </div>
+                <div class="col-6 mb-3">
+                    {{ form.especie.errors }}
+                    <label for="{{ form.especie.id_for_label }}">Especie</label> <br>
+                    {{ form.especie }}
+                </div>
+                <div class="col-6 mb-3">
+                    {{ form.raza.errors }}
+                    <label for="{{ form.raza.id_for_label }}">Raza</label> <br>
+                    {{ form.raza }}
+                </div>
+                <div class="col-6 mb-3">
+                    {{ form.lugar_encontrado.errors }}
+                    <label for="{{ form.lugar_encontrado.id_for_label }}">Lugar/Mapa</label> <br>
+                    {{ form.lugar_encontrado }}
+                </div>
+                <div class="col-6 mb-3">
+                    {{ form.fecha_encontrado.errors }}
+                    <label for="{{ form.fecha_encontrado.id_for_label }}">Fecha encontrado</label> <br>
+                    {{ form.fecha_encontrado }}
+                </div>
+                <div class="col-6 mb-3">
+                    {{ form.datos_contacto.errors }}
+                    <label for="{{ form.datos_contacto.id_for_label }}">Contacto</label> <br>
+                    {{ form.datos_contacto }}
+                </div>
+                <div class="col-6">
+                    {{ form.collar.errors }}
+                    {{ form.collar }}
+                    <label for="{{ form.collar.id_for_label }}">Collar</label>
+                </div>
+                <div class="col-6 mb-3">
+                    {{ form.devuelto.errors }}
+                    {{ form.devuelto }}
+                    <label for="{{ form.devuelto.id_for_label }}">Devuelto</label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="col-6 mb-3">
+                    {{ form.num_chip.errors }}
+                    <label for="{{ form.num_chip.id_for_label }}">Num. Chip</label> <br>
+                    {{ form.num_chip }}
+                </div>
+                <div class="col-6 mb-3">
+                    {{ form.tamano.errors }}
+                    <label for="{{ form.tamano.id_for_label }}">Tamaño</label> <br>
+                    {{ form.tamano }}
+                </div>
+                <div class="col-6 mb-3">
+                    {{ form.pelo.errors }}
+                    <label for="{{ form.pelo.id_for_label }}">Pelo</label> <br>
+                    {{ form.pelo }}
+                </div>
+                <div class="col-6">
+                    {{ form.color.errors }}
+                    <label for="{{ form.color.id_for_label }}">Color</label> <br>
+                    {{ form.color }}
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="col-6 mb-3">
+                    {{ form.sexo.errors }}
+                    <label for="{{ form.sexo.id_for_label }}">Sexo</label> <br>
+                    {{ form.sexo }}
+                </div>
+                <div class="col-6 mb-3">
+                    {{ form.descripcion.errors }}
+                    <label for="{{ form.descripcion.id_for_label }}">Descripción</label> <br>
+                    {{ form.descripcion|safe }}
+                </div>
+            </div>
+
+
+            <hr>
+            <div class="mb-3">
+                {{ form.foto.errors }}
+                <label for="{{ form.foto.id_for_label }}">Imagen</label>
+                {{ form.foto }}
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <input type="submit" class="btn" value="{{object|yesno:'Actualizar,Crear'}}" >
+                    {% if object %}
+                        <a class="btn" role="button" href="{% url 'm_encontrada_delete' object.id %}"> Eliminar </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+{% endblock %}
+

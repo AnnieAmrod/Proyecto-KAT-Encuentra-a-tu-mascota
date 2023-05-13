@@ -1,0 +1,17 @@
+{% extends 'common/base_katapp.html' %}
+
+
+{% block content %}
+<div class="container pb-5">
+    <!-- Para crear elementos -->
+    <h2>{{object|yesno:'Actualizar mascota encontrada,Creación de una nueva mascota encontrada'}}</h2>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <!-- csrf_token es para hacer más segura la aplicación ante un posible robo de token (cross-site-scripting)(man-in-the-middle) -->
+        {{ form.as_p }}
+        <input type="submit" class="btn" value="{{object|yesno:'Actualizar,Crear'}}">
+        {% if object %}
+            <a class="btn" href="{% url 'm_encontrada_delete' object.id %}"> Eliminar </a>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

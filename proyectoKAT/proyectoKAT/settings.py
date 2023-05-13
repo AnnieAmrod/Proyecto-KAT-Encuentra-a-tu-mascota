@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     
     #Aplicaciones descargadas
     'ckeditor',
+    'crispy_forms',
+    'crispy_bootstrap5',
     
     #Aplicaciones propias
     'common',
@@ -169,8 +171,16 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],
-        ]
+        ],
+        'width': '210px',
+        'height': '200px',
     }
 }
 
 MESSAGE_TAGS = {messages.ERROR: 'danger'}
+
+#-------------------- Para que funcionen las plantillas de Crispy Forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

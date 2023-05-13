@@ -65,6 +65,10 @@ div#navbarNav.collapse.navbar-collapse{
     z-index: 0;
 }
 
+#id_color{
+    height: 300px;
+}
+
 footer{
     background-color: #8C2986;
     margin-top: 5%;

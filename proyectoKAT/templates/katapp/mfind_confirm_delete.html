@@ -1,0 +1,11 @@
+{% extends 'common/base_katapp.html' %}
+{% block content %}
+<div class="container">
+    <h2>Eliminar una mascota encontrada</h2>
+    <form method="post">{% csrf_token %}
+        <p>¿Está seguro que quiere eliminar esta mascota encontrada "{{ object }}"?</p>
+        {{ form }}
+        <input type="submit" value="Confirmar" class="btn">
+    </form>
+</div>
+{% endblock %}

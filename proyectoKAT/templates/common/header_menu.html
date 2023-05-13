@@ -1,4 +1,4 @@
-<header class="menu navbar navbar-expand-lg  d-none d-lg-flex navbar-dark sticky-top flex-md-nowrap p-0 shadow">
+<header class="menu navbar navbar-expand-xl  d-none d-xl-flex navbar-dark sticky-top flex-md-nowrap p-0 shadow">
   <div class="container-fluid">
     <a class="navbar-brand col-md-3 col-lg-3 px-3 ml-5" href="{% url 'panel' %}">
       <img src="#" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
@@ -10,19 +10,19 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'panel' %}">Inicio</a>
+          <a class="nav-link{% if request.path == '/panel/' %} active{% endif %}" aria-current="page" href="{% url 'panel' %}">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'm_perdida' %}">Perdidas</a>
+          <a class="nav-link{% if request.path == '/m_perdida/' %} active{% endif %}" href="{% url 'm_perdida' %}">Perdidas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'm_encontrada' %}">Encontradas</a>
+          <a class="nav-link{% if request.path == '/m_encontrada/' %} active{% endif %}" href="{% url 'm_encontrada' %}">Encontradas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'aviso' %}">Avisos</a>
+          <a class="nav-link{% if request.path == '/aviso/' %} active{% endif %}" href="{% url 'aviso' %}">Avisos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'conocenos' %}">Conoce el proyecto KAT</a>
+          <a class="nav-link{% if request.path == '/conocenos/' %} active{% endif %}" href="{% url 'conocenos' %}">Conoce el proyecto KAT</a>
         </li>
       </ul>
     </div>
@@ -36,10 +36,13 @@
   </div>
 </header>
 
-<header class="menu navbar  d-flex d-lg-none navbar-dark sticky-top flex-md-nowrap p-0 shadow">
+<header class="menu navbar navbar-expand-lg d-flex d-xl-none navbar-dark sticky-top flex-md-nowrap p-0 shadow">
 
     <div class="container-fluid">
-      <a class="navbar-brand col-md-3 col-lg-3 px-3 ml-5" href="{% url 'panel' %}">
+      <a class="navbar-brand d-none d-md-flex col-md-3 col-lg-1 px-3 ml-5" href="{% url 'panel' %}">
+        <img src="#" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+      </a>
+      <a class="navbar-brand d-flex d-md-none col-md-3 col-lg-3 px-3 ml-5" href="{% url 'panel' %}">
         <img src="#" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         KAT: Encuentra a tu mascota
       </a>
@@ -49,19 +52,19 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'panel' %}">Inicio</a>
+            <a class="nav-link{% if request.path == '/panel/' %} active{% endif %}" aria-current="page" href="{% url 'panel' %}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'm_perdida' %}">Perdidas</a>
+            <a class="nav-link{% if request.path == '/m_perdida/' %} active{% endif %}" href="{% url 'm_perdida' %}">Perdidas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'm_encontrada' %}">Encontradas</a>
+            <a class="nav-link{% if request.path == '/m_encontrada/' %} active{% endif %}" href="{% url 'm_encontrada' %}">Encontradas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'aviso' %}">Avisos</a>
+            <a class="nav-link{% if request.path == '/aviso/' %} active{% endif %}" href="{% url 'aviso' %}">Avisos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'conocenos' %}">Conoce el proyecto KAT</a>
+            <a class="nav-link{% if request.path == '/conocenos/' %} active{% endif %}" href="{% url 'conocenos' %}">Conoce el proyecto KAT</a>
           </li>
           <li class="nav-item">
             <div class="nav-item text-nowrap">
