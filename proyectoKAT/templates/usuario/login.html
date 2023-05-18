@@ -1,0 +1,18 @@
+{% extends 'common/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+
+        <h2>{{titulo}}</h2>
+
+    <!-- Eliminamos novalidate -->
+    <form method="post" enctype="multipart/form-data" action=".">
+        <!-- Extraído de: https://www.merixstudio.com/blog/django-crispy-forms-what-are-they-about/ -->
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn mr-2" value="Login" >
+    </form>
+</div>
+{% endblock %}
