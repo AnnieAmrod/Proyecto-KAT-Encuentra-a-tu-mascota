@@ -1,0 +1,13 @@
+{% extends 'common/base_katapp.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Para crear elementos -->
+    <h2>Modificar datos del usuario{% if usuario.nombre %}: {{ usuario.nombre }} {%endif%} {% if usuario.apellido1 %} {{ usuario.apellido1 }} {% endif %}</h2>
+    <form method="post" enctype="multipart/form-data" novalidate>{% crispy form %}
+        <input type="submit" class="btn mr-2" value="Modificar mis datos">
+    </form>
+</div>
+{% endblock %}

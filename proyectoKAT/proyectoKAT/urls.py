@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from common import views as common_views
 from katapp import views as  katapp_views
+from usuario import views as usuario_views
 from usuario.views import LoginFormView, LogoutView
 from django.urls import include
 
@@ -58,6 +59,8 @@ urlpatterns = [
 
     path('m_perdida_contacto/<int:id>/', katapp_views.MPerdidaContactoView.as_view(), name='m_perdida_contacto'),
     path('m_encontrada_contacto/<int:id>/', katapp_views.MEncontradaContactoView.as_view(), name='m_encontrada_contacto'),
+
+    path('usuario_registrado_update/<int:pk>/', usuario_views.UsuarioRegistradoUpdateView.as_view(), name='usuario_registrado_update'),
 
 ]
 

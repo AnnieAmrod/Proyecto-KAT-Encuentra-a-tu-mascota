@@ -162,7 +162,7 @@ class AvisoDeleteView(AreaRestringidaMixin, DeleteView):
     template_name = 'katapp/aviso_confirm_delete.html'
 
 #!------------------------------------------ CONTACTO MASCOTA -----------------------------------------
-class MPerdidaContactoView(TemplateView):
+class MPerdidaContactoView(AreaRestringidaMixin, TemplateView):
     template_name = "katapp/mascota_perdida_contacto.html"
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -170,7 +170,7 @@ class MPerdidaContactoView(TemplateView):
         context['mascota'] = MLost.objects.get(id=c_lost_id)
         return context
     
-class MEncontradaContactoView(TemplateView):
+class MEncontradaContactoView(AreaRestringidaMixin, TemplateView):
     template_name = "katapp/mascota_encontrada_contacto.html"
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
