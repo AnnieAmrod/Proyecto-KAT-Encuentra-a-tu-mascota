@@ -3,12 +3,12 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
+<div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <img src="{% static 'kat_logo_final.png' %}" alt="Logo" class="img-fluid d-block mx-auto mb-4">
+            <a href="{% url 'panel' %}"><img src="{% static 'kat_logo_final.png' %}" alt="Logo" class="img-fluid d-block mx-auto mb-4"></a>
             <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-lg mr-4">Iniciar sesión</a>
+                <a href="/accounts/login" class="btn btn-lg mr-4">Iniciar sesión</a>
                 <a href="{% url 'panel' %}" class="btn btn-lg">Entrar como invitado</a>
             </div>
         </div>

@@ -39,17 +39,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Aplicación utilizada para administrar y gestionar sitios web, proporciona un modelo de base de datos para almacenar información sobre diferentes sitios web
+    'django.contrib.sites',
     
     #Aplicaciones descargadas
     'ckeditor',
     'crispy_forms',
     'crispy_bootstrap5',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     
     #Aplicaciones propias
     'common',
     'usuario',
     'katapp',
 ]
+
+#Variable de configuración utilizada para especificar el ID del sitio que se está utilizando actualmente. Se utiliza en conjunción con la aplicación 'sites' de Django. Por defecto crea un registro, por ello lo igualamos a 1
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,6 +82,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #Para que funcione allauth
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -104,12 +114,6 @@ DATABASES = {
     }
 }
 
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -131,8 +135,32 @@ AUTH_PASSWORD_VALIDATORS = [
 #Configurar autenticación utilizando el modelo predeterminado de Django
 AUTH_USER_MODEL = 'usuario.Usuario'
 
+#Creamos las variables de configuración que indican la URL o vista a la que se redirigirá al usuario tras realizar login/logout
+LOGIN_REDIRECT_URL = '/panel/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 LOGIN_URL = '/login/'
+
+#Se trata de una lista de clases de autenticación que se utilizan para autenticar a los usuarios. En este caso, django.contrib.auth.backends.ModelBackend nos proporciona una forma estándar de autenticar a los usuarios mediante el modelo User, mientras que allauth.account.auth_backends.AuthenticationBackend permite que el usuario inicie la sesión utilizando su dirección de correo electrónico y contraseña (Si no se encuentra en la primera clase de autenticación, se prueba en la siguiente clase sucesivamente hasta que encuentre una clase que autentique al usuario o hasta que no queden clases de autenticación, en este caso tenemos únicamente dos clases de autenticación)
+AUTHENTICATION_BACKENDS = [
+# Necesaria para realizar el login usando username en el administrador de Django, independiente de django allauth
+    'django.contrib.auth.backends.ModelBackend',
+
+    #métodos de autenticación especifica de  `allauth`, como por ejemplo email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+#Configuramos el sistema de gestión de usuarios para que requiera una dirección de correo electrónico para el registro y el inicio de sesión, en lugar de requerir un nombre de usuario. Utilizará el email como método de autenticación para el inicio de sesión
+#La variable ACCOUNT_USER_MODEL_USERNAME_FIELD se utiliza para especificar el campo del modelo de usuario que se utilizará como nombre de usuario para iniciar sesión. Si se establece en None, indica que el sistema no utilizará un nombre de usuario para iniciar sesión
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+#La variable ACCOUNT_EMAIL_REQUIRED especifica si se requiere que los usuarios proporcionen una dirección de correo electrónico al registrarse en el sistema. Si se establece en True, indica que los usuarios deberán proporcionar una dirección de correo electrónico válida para poder registrarse
+ACCOUNT_EMAIL_REQUIRED = True
+#La variable ACCOUNT_USERNAME_REQUIRED especifica si se requiere que los usuarios proporcionen un nombre de usuario al registrarse en el sistema. Si se establece en False, significa que los usuarios no necesitan proporcionar un nombre de usuario para registrarse
+ACCOUNT_USERNAME_REQUIRED = False
+#La variable ACCOUNT_AUTHENTICATION_METHOD especifica el método de autenticación que se utilizará para iniciar sesión en el sistema. Si se establece en 'email', significa que los usuarios podrán iniciar sesión utilizando su dirección de correo electrónico en lugar de un nombre de usuario
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+#La variable ACCOUNT_EMAIL_VERIFICATION se utiliza para controlar cómo se verifican las direcciones de correo electrónico de los usuarios. Si se establece en 'mandatory', significa que se requiere que todos los usuarios verifiquen su dirección de correo antes de poder iniciar sesión o realizar acciones en la aplicación, se utiliza para evitar que los usuarios introduzcan direcciones de correo no válidas o falsas
+#ACCOUNT_EMAIL_VERIFICATION = 'mandatory' #TODO descomentar cuando haga el tema de los emails
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

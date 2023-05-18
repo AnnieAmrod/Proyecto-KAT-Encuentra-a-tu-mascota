@@ -45,7 +45,11 @@
                 {% if avisos %}
                     {% for aviso in avisos %}
                         <div class="col-md-4 mb-3">
+                            {% if user.is_authenticated and aviso.contacto == user %}
+                            <a href="{% url 'aviso_update' pk=aviso.id %}">
+                            {% else %}
                             <a href="{% url 'avisodetail' id=aviso.id %}">
+                                {% endif %}
                                 <div class="card">
                                     {% if aviso.imagen %}
                                         <img src="{{ aviso.imagen.url }}" class="card-img-top" alt="{{ aviso.razon }}">

@@ -28,9 +28,17 @@
     </div>
     <div class="nav-item text-nowrap">
       {% if user.is_authenticated %}
-      <a class="nav-link" href="#">Cerrar sesión</a>
+      <li class="nav-item" style="list-style-type: none;">
+        {{ user.get_username }}
+      </li>
+      {% endif %}
+    </div>
+    <div class="nav-item text-nowrap">
+      {% if user.is_authenticated %}
+      <!-- <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a> -->
+      <a class="nav-link" href="/accounts/logout">Cerrar sesión</a>
       {% else %}
-      <a class="nav-link" href="#">Iniciar sesión</a>
+      <a class="nav-link" href="/accounts/login">Iniciar sesión</a>
       {% endif %}
     </div>
   </div>
@@ -39,9 +47,6 @@
 <header class="menu navbar navbar-expand-lg d-flex d-xl-none navbar-dark sticky-top flex-md-nowrap p-0 shadow">
 
     <div class="container-fluid">
-      <a class="navbar-brand d-none d-md-flex col-md-3 col-lg-1 px-3 ml-5" href="{% url 'panel' %}">
-        <img src="#" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      </a>
       <a class="navbar-brand d-flex d-md-none col-md-3 col-lg-3 px-3 ml-5" href="{% url 'panel' %}">
         <img src="#" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         KAT: Encuentra a tu mascota
@@ -64,14 +69,19 @@
             <a class="nav-link{% if request.path == '/aviso/' %} active{% endif %}" href="{% url 'aviso' %}">Avisos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link{% if request.path == '/conocenos' %} active{% endif %}" href="{% url 'conocenos' %}">Conoce el proyecto KAT</a>
+            <a class="nav-link{% if request.path == '/conocenos/' %} active{% endif %}" href="{% url 'conocenos' %}">Conoce el proyecto KAT</a>
           </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link">{{ user.get_username }}</a>
+          </li>
+          {% endif %}
           <li class="nav-item">
             <div class="nav-item text-nowrap">
               {% if user.is_authenticated %}
-              <a class="nav-link" href="#">Cerrar sesión</a>
+              <a class="nav-link" href="/accounts/logout">Cerrar sesión</a>
               {% else %}
-              <a class="nav-link" href="#">Iniciar sesión</a>
+              <a class="nav-link" href="/accounts/login">Iniciar sesión</a>
               {% endif %}
             </div>
           </li>

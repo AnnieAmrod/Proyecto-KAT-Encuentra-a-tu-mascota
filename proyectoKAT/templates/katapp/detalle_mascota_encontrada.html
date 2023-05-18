@@ -28,7 +28,9 @@
             <strong>Sexo:</strong> {% if mascota.sexo == 'H' %}Hembra{% else %}Macho{% endif %}</p>        </p>
             <p><strong>Año nacimiento:</strong> {{ mascota.anio_nacimiento }}</p>
             <p><strong>Descripción:</strong> {{ mascota.descripcion|safe }}</p>
-            <a href="#" class="btn">Contacto</a>
+            {% if user.is_authenticated %}
+                <a href="#" class="btn">Contacto</a>
+            {% endif %}
             <a href="{% url 'm_encontrada' %}" class="btn">Volver</a>
         </div>
     </div>

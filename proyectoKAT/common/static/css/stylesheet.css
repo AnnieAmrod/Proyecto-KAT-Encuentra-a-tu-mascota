@@ -126,6 +126,10 @@ select{
     border-radius: 0.375rem;
 }
 
+select#id_raza{
+    padding: 6px 0px 6px 0px;
+}
+
 option{
     color: #8C2986;
 }
@@ -200,4 +204,48 @@ footer{
         min-height: 460px;
         max-height: 460px;
     }
+}
+
+/*!------------------- ALLAUTH -----------------------*/
+.btn-allauth{
+    background-color: #8C2986;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border-color: transparent;
+}
+
+.btn-allauth:hover{
+    color: #8C2986;
+    border-color: #8C2986;
+    background-color: transparent;
+}
+
+.menu-allauth{
+    color: #FFFFFF;
+    padding: 15px;
+}
+
+.menu-allauth:hover{
+    color: #FFC4FC;
+}
+
+.radiobutton-allauth, input#id_remember{
+    accent-color: #8C2986;
+}
+
+input#id_email::placeholder, input#id_login::placeholder, input#id_password::placeholder, input#id_password1::placeholder, input#id_password2::placeholder, input#id_oldpassword::placeholder{
+    color: #FFC4FC;
+}
+
+.enlace-allauth a{
+    color: #FF64F5;
+}
+
+.enlace-allauth:hover a{
+    color: #8C2986;
+}
+
+form#signup_form.signup{
+    text-align: left;
 }

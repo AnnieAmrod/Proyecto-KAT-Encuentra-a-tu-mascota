@@ -8,6 +8,8 @@ from django.contrib.messages.views import SuccessMessageMixin #Importar para que
 from .mixins import MLostMixin, MFindMixin, AvisoMixin #Importar nuestro mixin
 from katapp.forms import MLostForm, MFindForm, AvisoForm #Importar los forms
 
+from common.mixins import AreaRestringidaMixin #Importamos los mixins
+
 # Create your views here.
 #!------------------------------------------ MASCOTAS PERDIDAS ---------------------------------------
 class MPerdidaListView(TemplateView):
@@ -103,7 +105,7 @@ class AvisoDetailView(TemplateView):
         return context
 
 #!----------------------------------------- FORMULARIO CREAR M_LOST ---------------------------------------
-class MLostCreateView(MLostMixin, CreateView):
+class MLostCreateView(AreaRestringidaMixin, MLostMixin, CreateView):
     form_class = MLostForm
     success_message = "Mascota creada exitosamente"
     def get_success_message(self, cleaned_data):
@@ -111,50 +113,50 @@ class MLostCreateView(MLostMixin, CreateView):
 
 #!--------------------------------------- FORMULARIO MODIFICAR M_LOST -------------------------------------
 
-class MLostUpdateView(MLostMixin, UpdateView):
+class MLostUpdateView(AreaRestringidaMixin, MLostMixin, UpdateView):
     form_class = MLostForm
     def get_success_message(self, cleaned_data):
         return "Mascota '{}' actualizada exitosamente".format(str(self.object))
     #success_url = reverse_lazy('m_perdida')
 
 #!----------------------------------------- FORMULARIO BORRAR M_LOST ---------------------------------------
-class MLostDeleteView(DeleteView):
+class MLostDeleteView(AreaRestringidaMixin, DeleteView):
     model = MLost
     success_message = "Mascota borrada exitosamente"
     success_url = reverse_lazy('m_perdida')
     template_name = 'katapp/mlost_confirm_delete.html'
 
 #!-------------------------------------------- FORMULARIOS M_FIND ------------------------------------------
-class MFindCreateView(MFindMixin, CreateView):
+class MFindCreateView(AreaRestringidaMixin, MFindMixin, CreateView):
     form_class = MFindForm
     success_message = "Mascota creada exitosamente"
     def get_success_message(self, cleaned_data):
         return self.success_message + ' - ' + str(self.object)
 
-class MFindUpdateView(MFindMixin, UpdateView):
+class MFindUpdateView(AreaRestringidaMixin, MFindMixin, UpdateView):
     form_class = MFindForm
     def get_success_message(self, cleaned_data):
         return "Mascota '{}' actualizada exitosamente".format(str(self.object))
     #success_url = reverse_lazy('m_perdida')
 
-class MFindDeleteView(DeleteView):
+class MFindDeleteView(AreaRestringidaMixin, DeleteView):
     model = MLost
     success_url = reverse_lazy('m_encontrada')
     template_name = 'katapp/mfind_confirm_delete.html'
 
 #!-------------------------------------------- FORMULARIOS AVISOS ------------------------------------------
-class AvisoCreateView(AvisoMixin, CreateView):
+class AvisoCreateView(AreaRestringidaMixin, AvisoMixin, CreateView):
     form_class = AvisoForm
     success_message = "Aviso creado exitosamente"
     def get_success_message(self, cleaned_data):
         return self.success_message + ' - ' + str(self.object)
 
-class AvisoUpdateView(AvisoMixin, UpdateView):
+class AvisoUpdateView(AreaRestringidaMixin, AvisoMixin, UpdateView):
     form_class = AvisoForm
     def get_success_message(self, cleaned_data):
         return "Aviso '{}' actualizado exitosamente".format(str(self.object))
 
-class AvisoDeleteView(DeleteView):
+class AvisoDeleteView(AreaRestringidaMixin, DeleteView):
     model = Aviso
     success_url = reverse_lazy('avisos')
     template_name = 'katapp/aviso_confirm_delete.html'
