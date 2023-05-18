@@ -160,3 +160,20 @@ class AvisoDeleteView(AreaRestringidaMixin, DeleteView):
     model = Aviso
     success_url = reverse_lazy('avisos')
     template_name = 'katapp/aviso_confirm_delete.html'
+
+#!------------------------------------------ CONTACTO MASCOTA -----------------------------------------
+class MPerdidaContactoView(TemplateView):
+    template_name = "katapp/mascota_perdida_contacto.html"
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        c_lost_id = kwargs.get('id')
+        context['mascota'] = MLost.objects.get(id=c_lost_id)
+        return context
+    
+class MEncontradaContactoView(TemplateView):
+    template_name = "katapp/mascota_encontrada_contacto.html"
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        c_find_id = kwargs.get('id')
+        context['mascota'] = MFind.objects.get(id=c_find_id)
+        return context

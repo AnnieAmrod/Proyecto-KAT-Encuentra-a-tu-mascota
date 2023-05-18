@@ -29,7 +29,7 @@
             <p><strong>Año nacimiento:</strong> {{ mascota.anio_nacimiento }}</p>
             <p><strong>Descripción:</strong> {{ mascota.descripcion|safe }}</p>
             {% if user.is_authenticated %}
-                <a href="#" class="btn">Contacto</a>
+                <a href="{% url 'm_perdida_contacto' id=mascota.id %}" class="btn">Contacto</a>
             {% endif %}
             <a href="{% url 'm_perdida' %}" class="btn">Volver</a>
         </div>

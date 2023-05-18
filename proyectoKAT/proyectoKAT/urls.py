@@ -56,6 +56,9 @@ urlpatterns = [
 
     path('accounts/', include('allauth.urls')),
 
+    path('m_perdida_contacto/<int:id>/', katapp_views.MPerdidaContactoView.as_view(), name='m_perdida_contacto'),
+    path('m_encontrada_contacto/<int:id>/', katapp_views.MEncontradaContactoView.as_view(), name='m_encontrada_contacto'),
+
 ]
 
 if settings.DEBUG: urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
