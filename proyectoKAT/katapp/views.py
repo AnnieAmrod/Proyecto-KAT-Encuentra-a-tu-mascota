@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 from .models import MLost, MFind, Aviso
 from django.views.generic.edit import CreateView, UpdateView, DeleteView #Para crear, actualizar y eliminar elementos (CBV)
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy #Modificar la vista para que redireccione correctamente al crear un elemento
 from django.contrib.messages.views import SuccessMessageMixin #Importar para que salgan los mensajes
 from .mixins import MLostMixin, MFindMixin, AvisoMixin #Importar nuestro mixin
 from katapp.forms import MLostForm, MFindForm, AvisoForm #Importar los forms
