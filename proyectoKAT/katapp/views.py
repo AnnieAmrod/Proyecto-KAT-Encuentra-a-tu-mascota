@@ -10,26 +10,37 @@ from katapp.forms import MLostForm, MFindForm, AvisoForm #Importar los forms
 
 from common.mixins import AreaRestringidaMixin #Importamos los mixins
 
-from django_filters.views import FilterView #Importar para filtrar las vistas
-from .filters import MLostFilter #Importar nuestro filtro
+#from django_filters.views import FilterView #Importar para filtrar las vistas
+#from .filters import MLostFilter #Importar nuestro filtro
 
 # Create your views here.
 #!------------------------------------------ MASCOTAS PERDIDAS ---------------------------------------
-class MPerdidaListView(FilterView, ListView):
+class MPerdidaListView(TemplateView):
     template_name = "katapp/listado_m_perdidas.html"
-    filterset_class = MLostFilter
-    queryset = MLost.objects.all()
+    #filterset_class = MLostFilter
+    #queryset = MLost.objects.all()
 
-    '''def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(MPerdidaListView, self).get_context_data(**kwargs)
+        
+        #!PRUEBA PARA SACAR MÁS DE UN REGISTRO AL FILTRAR
+        filtro_id = kwargs.get('filtro_id')
+        if filtro_id:
+            # Filtrar por especie seleccionada
+            context['mascotas'] = MLost.objects.filter(especie_id=filtro_id)
+        else:
+            # Obtener todas las mascotas
+            context['mascotas'] = MLost.objects.all()
+
+        return context
         #!CÓDIGO ANTES DE LOS FILTROS ----------------------------------
-        lost_especie_id = kwargs.get('pk')
-        context['mascotas'] = MLost.objects.filter(id=lost_especie_id) if lost_especie_id else MLost.objects.all()
+        '''filtro_id = kwargs.get('filtro_id')
+        context['mascotas'] = MLost.objects.filter(id=filtro_id) if filtro_id else MLost.objects.all()
         return context'''
         #!CÓDIGO DESPUES DE LOS FILTROS ----------------------------------
         #context['filter_form'] = self.filterset.form # Utiliza la clave 'filter_form' 
         #return context
-    def get_queryset(self):
+    '''def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.select_related('especie')
         queryset = queryset.prefetch_related('color', 'raza')
@@ -41,7 +52,7 @@ class MPerdidaListView(FilterView, ListView):
         self.filterset = self.filterset_class(self.request.GET, queryset=queryset)
         queryset = self.filterset.qs
 
-        return queryset
+        return queryset'''
 '''def mperdida_list(request):
     f = MLostFilter(request.GET, queryset=MLost.objects.all())
     selected_species = request.GET.get('especie')

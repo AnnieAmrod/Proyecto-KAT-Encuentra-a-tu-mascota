@@ -1,0 +1,19 @@
+<label class="h4" for="especie">Especie</label>
+<select id="especie" name="especie" class="form-select" onchange="redirectToSelectedOption()">
+    <option selected disabled>Selecciona una especie</option>
+    {% for especie in especies %}
+        <option value="{{ especie.id }}">{{ especie.nombre }}</option>
+    {% endfor %}
+</select>
+
+<script>
+    function redirectToSelectedOption() {
+        var selectElement = document.getElementById("especie");
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        var especieId = selectedOption.value;
+
+        if (especieId) {
+            window.location.href = "{% url 'm_perdida' %}" + especieId + "/";
+        }
+    }
+</script>
