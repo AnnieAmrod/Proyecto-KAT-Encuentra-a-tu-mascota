@@ -1,75 +1,45 @@
 {% extends 'common/base_katapp.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 <div class="container-fluid">
     <div class="row mt-5">
         <div class="col-md-3">
             <h2>Filtros</h2>
             <hr>
-            <h4>Especie</h4>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="perro">
-                <label class="form-check-label" for="perro">
-                    Perro
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="gato">
-                <label class="form-check-label" for="gato">
-                    Gato
-                </label>
-            </div>
-            <hr>
-            <h4>Ubicación</h4>
-            <div class="form-group">
-                <label for="ubicacion">Introduce una ubicación:</label>
-                <input type="text" class="form-control" id="ubicacion">
-            </div>
-            <hr>
-            <h4>Estado</h4>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="encontrada">
-                <label class="form-check-label" for="encontrada">
-                    Encontrada
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="perdida">
-                <label class="form-check-label" for="perdida">
-                    Perdida
-                </label>
+                {% crispy filter.form %}
             </div>
         </div>
         <div class="col-md-9 pb-5">
             <h1>Listado de mascotas perdidas</h1>
             <div class="row">
-                {% if mascotas %}
-                    {% for mascota in mascotas %}
-                        <div class="col-md-4 mb-3">
-                            {% if user.is_authenticated and mascota.datos_contacto == user %}
-                            <a href="{% url 'm_perdida_update' pk=mascota.id %}">
-                            {% else %}
-                            <a href="{% url 'm_perdidadetail' id=mascota.id %}">
-                            {% endif %}
-                                <div class="card lostfind">
-                                    {% if mascota.foto %}
-                                        <img src="{{ mascota.foto.url }}" class="card-img-top" alt="{{ mascota.nombre }}">
+                {% for mascota in filter.qs %} <!-- Utiliza la clave 'filter_form' -->
+                    <div class="col-md-4 mb-3">
+                        {% if user.is_authenticated and mascota.datos_contacto == user %}
+                        <a href="{% url 'm_perdida_update' pk=mascota.id %}">
+                        {% else %}
+                        <a href="{% url 'm_perdidadetail' id=mascota.id %}">
+                        {% endif %}
+                            <div class="card lostfind">
+                                {% if mascota.foto %}
+                                    <img src="{{ mascota.foto.url }}" class="card-img-top" alt="{{ mascota.nombre }}">
+                                {% endif %}
+                                <div class="card-body lostfind">
+                                    <h2 class="card-title h5">{{ mascota.nombre }}</h5>
+                                    {% if mascota.descripcion|length > 70 %}
+                                    <p class="card-text">{{ mascota.descripcion|safe|slice:":70" }}...</p>
+                                    {% else %}
+                                    <p class="card-text">{{ mascota.descripcion|safe|slice:":70" }}</p>
                                     {% endif %}
-                                    <div class="card-body lostfind">
-                                        <h2 class="card-title h5">{{ mascota.nombre }}</h5>
-                                        {% if mascota.descripcion|length > 70 %}
-                                        <p class="card-text">{{ mascota.descripcion|safe|slice:":70" }}...</p>
-                                        {% else %}
-                                        <p class="card-text">{{ mascota.descripcion|safe|slice:":70" }}</p>
-                                        {% endif %}
-                                    </div>
                                 </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No se han encontrado mascotas</p>
-                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                    {% empty %}
+                        <p>No se han encontrado mascotas</p>
+                {% endfor %}
             </div>
         </div>
     </div>

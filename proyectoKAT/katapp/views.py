@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.shortcuts import get_object_or_404
 from .models import MLost, MFind, Aviso
 from django.views.generic.edit import CreateView, UpdateView, DeleteView #Para crear, actualizar y eliminar elementos (CBV)
@@ -10,15 +10,30 @@ from katapp.forms import MLostForm, MFindForm, AvisoForm #Importar los forms
 
 from common.mixins import AreaRestringidaMixin #Importamos los mixins
 
+from django_filters.views import FilterView #Importar para filtrar las vistas
+from .filters import MLostFilter #Importar nuestro filtro
+
 # Create your views here.
 #!------------------------------------------ MASCOTAS PERDIDAS ---------------------------------------
-class MPerdidaListView(TemplateView):
+class MPerdidaListView(FilterView, ListView):
     template_name = "katapp/listado_m_perdidas.html"
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        lost_id = kwargs.get('pk')
-        context['mascotas'] = MLost.objects.filter(id=lost_id) if lost_id else MLost.objects.all()
-        return context
+    filterset_class = MLostFilter
+
+    #def get_context_data(self, *args, **kwargs):
+        #context = super().get_context_data(*args, **kwargs)
+        #!CÓDIGO ANTES DE LOS FILTROS ----------------------------------
+        #lost_id = kwargs.get('pk')
+        #context['mascotas'] = MLost.objects.filter(id=lost_id) if lost_id else MLost.objects.all()
+        #return context
+        #!CÓDIGO DESPUES DE LOS FILTROS ----------------------------------
+        #context['filter_form'] = self.filterset.form # Utiliza la clave 'filter_form' 
+        #return context
+def mperdida_list(request):
+    f = MLostFilter(request.GET, queryset=MLost.objects.all())
+    selected_species = request.GET.get('especie')
+    print("Valor seleccionado:", selected_species)
+    return render(request, 'katapp/listado_m_perdidas.html', {'filter': f})
+
 
 #-------------------------------- Recuperar mascota al clickar en una mascota de Panel
 def m_perdida_detail_view(request,pk):

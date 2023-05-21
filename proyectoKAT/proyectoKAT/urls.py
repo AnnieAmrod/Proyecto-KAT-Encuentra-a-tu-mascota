@@ -22,6 +22,7 @@ from katapp import views as  katapp_views
 from usuario import views as usuario_views
 from usuario.views import LoginFormView, LogoutView
 from django.urls import include
+from django_filters.views import FilterView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +30,9 @@ urlpatterns = [
     path('home/', common_views.HomeView.as_view(), name='home'),
     path('panel/', common_views.PanelView.as_view(), name='panel'),
 
-    path('m_perdida/', katapp_views.MPerdidaListView.as_view(), name='m_perdida'),
+    #path('m_perdida/', katapp_views.MPerdidaListView.as_view(), name='m_perdida'),
+    path('m_perdida/', katapp_views.mperdida_list, name="m_perdida"),
+    #path('m_perdida/', katapp_views.FilterView.as_view(model=katapp_views.MPerdidaListView), name='m_perdida'),
     path('m_perdidadetail/<int:id>/', katapp_views.MPerdidaDetailView.as_view(), name='m_perdidadetail'),
 
     path('m_perdida_create/', katapp_views.MLostCreateView.as_view(), name='m_perdida_create'), #Para crear elementos (CBV)
