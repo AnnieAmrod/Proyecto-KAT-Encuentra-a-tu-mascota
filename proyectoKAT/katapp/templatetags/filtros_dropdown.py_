@@ -1,0 +1,18 @@
+from django import template
+from ..models import Especie, Color, Raza
+register = template.Library()
+
+@register.inclusion_tag('katapp/especie_dropdown.html')
+def especie_dropdown():
+    especies = Especie.objects.all()
+    return {'especies': especies}
+
+@register.inclusion_tag('katapp/color_dropdown.html')
+def color_dropdown():
+    colores = Color.objects.all()
+    return {'colores': colores}
+
+@register.inclusion_tag('katapp/raza_dropdown.html')
+def raza_dropdown():
+    razas = Raza.objects.all()
+    return {'razas': razas}

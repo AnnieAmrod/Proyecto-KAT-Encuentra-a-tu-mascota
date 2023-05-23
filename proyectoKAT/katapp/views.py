@@ -23,16 +23,52 @@ class MPerdidaListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MPerdidaListView, self).get_context_data(**kwargs)
         
+        # Obtener los valores de los filtros enviados por el usuario
+        lugar_perdida = self.request.GET.get('lugar_perdida')
+        tamano = self.request.GET.get('tamano')
+        pelo = self.request.GET.get('pelo')
+        
         #!PRUEBA PARA SACAR MÁS DE UN REGISTRO AL FILTRAR
-        filtro_id = kwargs.get('filtro_id')
-        if filtro_id:
+        especie_id = kwargs.get('especie_id')
+        color_id = kwargs.get('color_id')
+        raza_id = kwargs.get('raza_id')
+
+        # Obtener todas las mascotas
+        mascotas = MLost.objects.all()
+
+        # Filtrar los objetos de MLost utilizando los filtros recibidos
+
+        if especie_id:
             # Filtrar por especie seleccionada
-            context['mascotas'] = MLost.objects.filter(especie_id=filtro_id)
-        else:
-            # Obtener todas las mascotas
-            context['mascotas'] = MLost.objects.all()
+            mascotas = mascotas.filter(especie_id=especie_id)
+
+        if color_id:
+            # Filtrar por color seleccionado
+            mascotas = mascotas.filter(color__id=color_id)
+
+        if raza_id:
+            # Filtrar por raza seleccionada
+            mascotas = mascotas.filter(raza_id=raza_id)
+
+        if lugar_perdida:
+            # Filtrar por lugar_perdida escrito
+            mascotas = mascotas.filter(lugar_perdida__icontains=lugar_perdida)
+        if tamano:
+            # Filtrar por tamaño escrito
+            mascotas = mascotas.filter(tamano__icontains=tamano)
+        if pelo:
+            # Filtrar por pelo escrito
+            mascotas = mascotas.filter(pelo__icontains=pelo)
+
+        #context['lugar_perdida'] = lugar_perdida
+        #context['tamano'] = tamano
+        #context['pelo'] = pelo
+
+        # Obtener todas las mascotas filtradas
+        context['mascotas'] = mascotas
 
         return context
+    
         #!CÓDIGO ANTES DE LOS FILTROS ----------------------------------
         '''filtro_id = kwargs.get('filtro_id')
         context['mascotas'] = MLost.objects.filter(id=filtro_id) if filtro_id else MLost.objects.all()

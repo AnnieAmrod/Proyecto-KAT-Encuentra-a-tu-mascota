@@ -1,0 +1,21 @@
+<label class="h4" for="raza">Raza</label>
+<select id="raza" name="raza" class="form-select" onchange="redirectToSelectedOptionRaza()">
+    <option selected disabled>Selecciona una raza</option>
+    {% for raza in razas %}
+        <option value="{{ raza.id }}">{{ raza.nombre }}</option>
+    {% endfor %}
+</select>
+
+<script>
+    function redirectToSelectedOptionRaza() {
+        var selectElement = document.getElementById("raza");
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        var razaId = selectedOption.value;
+
+        if (razaId) {
+            var url = "{% url 'm_perdida_raza' raza_id=0 %}";  // Obtener la URL con un valor de ejemplo para raza_id
+            url = url.replace('0', razaId);  // Reemplazar el valor del parámetro en la URL
+            window.location.href = url;
+        }
+    }
+</script>

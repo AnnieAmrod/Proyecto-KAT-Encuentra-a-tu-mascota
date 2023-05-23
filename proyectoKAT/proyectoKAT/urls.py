@@ -31,7 +31,9 @@ urlpatterns = [
     path('panel/', common_views.PanelView.as_view(), name='panel'),
 
     path('m_perdida/', katapp_views.MPerdidaListView.as_view(), name='m_perdida'),
-    path('m_perdida/<int:filtro_id>/', katapp_views.MPerdidaListView.as_view(), name='m_perdida'),
+    path('m_perdida/especie/<int:especie_id>/', katapp_views.MPerdidaListView.as_view(), name='m_perdida_especie'),
+    path('m_perdida/color/<int:color_id>/', katapp_views.MPerdidaListView.as_view(), name='m_perdida_color'),
+    path('m_perdida/raza/<int:raza_id>/', katapp_views.MPerdidaListView.as_view(), name='m_perdida_raza'),
     #path('m_perdida/', katapp_views.mperdida_list, name="m_perdida"),
     #path('m_perdida/', katapp_views.FilterView.as_view(model=katapp_views.MPerdidaListView), name='m_perdida'),
     path('m_perdidadetail/<int:id>/', katapp_views.MPerdidaDetailView.as_view(), name='m_perdidadetail'),

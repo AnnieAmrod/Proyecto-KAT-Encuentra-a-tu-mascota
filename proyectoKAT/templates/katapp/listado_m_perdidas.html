@@ -1,6 +1,8 @@
 {% extends 'common/base_katapp.html' %}
 
-{% load filtros_dropdown %}
+{% load especies_dropdown %}
+{% load colores_dropdown %}
+{% load razas_dropdown %}
 
 {% block content %}
 <div class="container-fluid">
@@ -9,26 +11,32 @@
             <h2>Filtros</h2>
             <hr>
                 {% especie_dropdown %}
-            <hr>
-            <h4>Ubicación</h4>
-            <div class="form-group">
-                <label for="ubicacion">Introduce una ubicación:</label>
-                <input type="text" class="form-control" id="ubicacion">
-            </div>
-            <hr>
-            <h4>Estado</h4>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="encontrada">
-                <label class="form-check-label" for="encontrada">
-                    Encontrada
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="perdida">
-                <label class="form-check-label" for="perdida">
-                    Perdida
-                </label>
-            </div>
+                {% color_dropdown %}
+                {% raza_dropdown %}
+            <form method="GET">
+
+                <hr>
+                <h4>Ubicación</h4>
+                <div class="form-group">
+                    <label for="ubicacion">Introduce una ubicación:</label>
+                    <input type="text" name="lugar_perdida" placeholder="Ubicación">
+                </div>
+                <hr>
+                <h4>Tamaño</h4>
+                <div class="form-group">
+                    <label for="ubicacion">Introduce el tamaño (En cm):</label>
+                    <input type="text" name="tamano" placeholder="Tamaño">
+                </div>
+                <hr>
+                <hr>
+                <h4>Pelo</h4>
+                <div class="form-group">
+                    <label for="ubicacion">Introduce el tipo de pelo (corto/medio/largo):</label>
+                    <input type="text" name="pelo" placeholder="Pelo">
+                </div>
+
+                <button class="btn" type="submit">Filtrar</button>
+            </form>
         </div>
         <div class="col-md-9 pb-5">
             <h1>Listado de mascotas perdidas</h1>

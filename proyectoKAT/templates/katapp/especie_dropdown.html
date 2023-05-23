@@ -1,5 +1,5 @@
 <label class="h4" for="especie">Especie</label>
-<select id="especie" name="especie" class="form-select" onchange="redirectToSelectedOption()">
+<select id="especie" name="especie" class="form-select" onchange="redirectToSelectedOptionEspecie()">
     <option selected disabled>Selecciona una especie</option>
     {% for especie in especies %}
         <option value="{{ especie.id }}">{{ especie.nombre }}</option>
@@ -7,13 +7,15 @@
 </select>
 
 <script>
-    function redirectToSelectedOption() {
+    function redirectToSelectedOptionEspecie() {
         var selectElement = document.getElementById("especie");
         var selectedOption = selectElement.options[selectElement.selectedIndex];
         var especieId = selectedOption.value;
 
         if (especieId) {
-            window.location.href = "{% url 'm_perdida' %}" + especieId + "/";
+            var url = "{% url 'm_perdida_especie' especie_id=0 %}";  // Obtener la URL con un valor de ejemplo para especie_id
+            url = url.replace('0', especieId);  // Reemplazar el valor del parámetro en la URL
+            window.location.href = url;
         }
     }
 </script>
