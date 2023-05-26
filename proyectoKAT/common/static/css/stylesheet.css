@@ -68,6 +68,12 @@ header.menu a.nav-link.active{
     background-color: #000000;
 }
 
+.card-img-top{
+    max-height: 240.94px;
+    object-fit: cover;
+    object-position: center;
+}
+
 div#navbarNav.collapse.navbar-collapse{
     font-weight: bold;
     font-size: 0.9em;

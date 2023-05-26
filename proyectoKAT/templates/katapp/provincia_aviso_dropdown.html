@@ -1,0 +1,21 @@
+<label class="h4" for="provincia">Provincia</label>
+<select id="provincia" name="provincia" class="form-select" onchange="redirectToSelectedOptionProvincia()">
+    <option selected disabled>Selecciona una provincia</option>
+    {% for provincia in provincias %}
+        <option value="{{ provincia.id }}">{{ provincia.nombre }}</option>
+    {% endfor %}
+</select>
+
+<script>
+    function redirectToSelectedOptionProvincia() {
+        var selectElement = document.getElementById("provincia");
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        var provinciaId = selectedOption.value;
+
+        if (provinciaId) {
+            var url = "{% url 'aviso_provincia' provincia_id=0 %}";  // Obtener la URL con un valor de ejemplo para provincia_id
+            url = url.replace('0', provinciaId);  // Reemplazar el valor del parámetro en la URL
+            window.location.href = url;
+        }
+    }
+</script>

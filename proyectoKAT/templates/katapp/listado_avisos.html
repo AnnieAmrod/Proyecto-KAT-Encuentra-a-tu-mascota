@@ -1,44 +1,31 @@
 {% extends 'common/base_katapp.html' %}
 
+{% load provincias_aviso_dropdown %}
+
 {% block content %}
 <div class="container-fluid">
     <div class="row mt-5">
         <div class="col-md-3">
             <h2>Filtros</h2>
             <hr>
-            <h4>Especie</h4>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="perro">
-                <label class="form-check-label" for="perro">
-                    Perro
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="gato">
-                <label class="form-check-label" for="gato">
-                    Gato
-                </label>
-            </div>
-            <hr>
-            <h4>Ubicación</h4>
-            <div class="form-group">
-                <label for="ubicacion">Introduce una ubicación:</label>
-                <input type="text" class="form-control" id="ubicacion">
-            </div>
-            <hr>
-            <h4>Estado</h4>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="encontrada">
-                <label class="form-check-label" for="encontrada">
-                    Encontrada
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="perdida">
-                <label class="form-check-label" for="perdida">
-                    Perdida
-                </label>
-            </div>
+            {% provincia_aviso_dropdown %}
+            <form method="GET">
+                <hr>
+                <h4>Tipo de aviso</h4>
+                <div class="form-group">
+                    <label for="ubicacion">Introduce el tipo de aviso (Avispas/Alimento/Peligros):</label>
+                    <input type="text" name="tipo_aviso" placeholder="Tipo de aviso">
+                </div>
+                <hr>
+                <h4>Ubicación</h4>
+                <div class="form-group">
+                    <label for="ubicacion">Introduce una ubicación:</label>
+                    <input type="text" name="ubicacion" placeholder="Ubicación">
+                </div>
+
+                <button class="btn" type="submit">Filtrar</button>
+            </form>
+
         </div>
         <div class="col-md-9">
             <div class="row">
@@ -50,13 +37,17 @@
                             {% else %}
                             <a href="{% url 'avisodetail' id=aviso.id %}">
                                 {% endif %}
-                                <div class="card">
+                                <div class="card lostfind">
                                     {% if aviso.imagen %}
                                         <img src="{{ aviso.imagen.url }}" class="card-img-top" alt="{{ aviso.razon }}">
                                     {% endif %}
-                                    <div class="card-body">
+                                    <div class="card-body lostfind">
                                         <h5 class="card-title">{{ aviso.razon }}</h5>
-                                        <p class="card-text">{{ aviso.descripcion|safe }}</p>
+                                        {% if aviso.descripcion|length > 70 %}
+                                        <p class="card-text">{{ aviso.descripcion|safe|slice:":70" }}...</p>
+                                        {% else %}
+                                        <p class="card-text">{{ aviso.descripcion|safe|slice:":70" }}</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </a>

@@ -159,7 +159,20 @@ ACCOUNT_USERNAME_REQUIRED = False
 #La variable ACCOUNT_AUTHENTICATION_METHOD especifica el método de autenticación que se utilizará para iniciar sesión en el sistema. Si se establece en 'email', significa que los usuarios podrán iniciar sesión utilizando su dirección de correo electrónico en lugar de un nombre de usuario
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 #La variable ACCOUNT_EMAIL_VERIFICATION se utiliza para controlar cómo se verifican las direcciones de correo electrónico de los usuarios. Si se establece en 'mandatory', significa que se requiere que todos los usuarios verifiquen su dirección de correo antes de poder iniciar sesión o realizar acciones en la aplicación, se utiliza para evitar que los usuarios introduzcan direcciones de correo no válidas o falsas
-#ACCOUNT_EMAIL_VERIFICATION = 'mandatory' #TODO descomentar cuando haga el tema de los emails
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory' #TODO descomentar cuando haga el tema de los emails
+
+#Configuración que se utiliza para que Django envíe correos electrónicos a través de un servidor de correo electrónico externo, como Gmail, haciendo uso del protocolo SMTP, el cual resulta útil para aplicaciones que necesitan enviar correos electrónicos a sus usuarios, como aplicaciones de comercio electrónico o redes sociales
+#La variable EMAIL_BACKEND se utiliza para especificar el backend de correo electrónico que se debe utilizar para enviar correos electrónicos, en este caso, se hace uso del backend de correo electrónico SMTP de Django
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#La variable EMAIL_HOST se utiliza para especificar el host del servidor de correo electrónico que se está utilizando para enviar emails. En este caso, se está utilizando el servidor de correo electrónico de Gmail
+EMAIL_HOST = 'smtp.gmail.com'
+#La variable EMAIL_PORT se utiliza para especificar el puerto del servidor de correo electrónico que se está utilizando para enviar correos electrónicos. En este caso, se está utilizando el puerto 587, que es el puerto recomendado para conectarse a servidores de correo electrónico a través de TLS.
+EMAIL_PORT = 587
+#Las variables EMAIL_HOST_USER y EMAIL_HOST_PASSWORD se utilizan para especificar un nombre de usuario y una contraseña para autenticar la conexión al servidor de correo electrónico. En este caso, se está utilizando una cuenta de correo electrónico de Gmail creada específicamente para enviar correos electrónicos desde la aplicación
+EMAIL_HOST_USER = 'avaluappdjango@gmail.com'
+EMAIL_HOST_PASSWORD = 'lmqoraagqzitzssz' #AvaluappDjango96!
+#EMAIL_USE_TLS se utiliza para especificar si se deben utilizar conexiones seguras (TLS) al enviar correos electrónicos. En este caso, se establece en True, lo que significa que sí se deben utilizar conexiones seguras, lo cual es importante para garantizar la privacidad y seguridad
+EMAIL_USE_TLS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

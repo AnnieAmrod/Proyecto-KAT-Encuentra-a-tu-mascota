@@ -43,6 +43,9 @@ urlpatterns = [
     path('m_perdida_delete/<int:pk>/', katapp_views.MLostDeleteView.as_view(), name='m_perdida_delete'),
 
     path('m_encontrada/', katapp_views.MEncontradaListView.as_view(), name='m_encontrada'),
+    path('m_encontrada/especie/<int:especie_id>/', katapp_views.MEncontradaListView.as_view(), name='m_encontrada_especie'),
+    path('m_encontrada/color/<int:color_id>/', katapp_views.MEncontradaListView.as_view(), name='m_encontrada_color'),
+    path('m_encontrada/raza/<int:raza_id>/', katapp_views.MEncontradaListView.as_view(), name='m_encontrada_raza'),
     path('m_encontradadetail/<int:id>/', katapp_views.MEncontradaDetailView.as_view(), name='m_encontradadetail'),
 
     path('m_encontrada_create/', katapp_views.MFindCreateView.as_view(), name='m_encontrada_create'), #Para crear elementos (CBV)
@@ -50,6 +53,7 @@ urlpatterns = [
     path('m_encontrada_delete/<int:pk>/', katapp_views.MFindDeleteView.as_view(), name='m_encontrada_delete'),
 
     path('aviso/', katapp_views.AvisoListView.as_view(), name='aviso'),
+    path('aviso/provincia/<int:provincia_id>/', katapp_views.AvisoListView.as_view(), name='aviso_provincia'),
     path('avisodetail/<int:id>/', katapp_views.AvisoDetailView.as_view(), name='avisodetail'),
 
     path('aviso_create/', katapp_views.AvisoCreateView.as_view(), name='aviso_create'), #Para crear elementos (CBV)

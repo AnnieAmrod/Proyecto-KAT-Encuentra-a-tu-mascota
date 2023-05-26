@@ -65,7 +65,7 @@ class MPerdidaListView(TemplateView):
         #context['pelo'] = pelo
 
         # Obtener todas las mascotas filtradas
-        context['mascotas'] = mascotas
+        context['mascotas_lost'] = mascotas
 
         return context
     
@@ -121,10 +121,55 @@ class MPerdidaDetailView(TemplateView):
 #!--------------------------------------------- MASCOTAS ENCONTRADAS ---------------------------------------
 class MEncontradaListView(TemplateView):
     template_name = "katapp/listado_m_encontradas.html"
-    def get_context_data(self, *args, **kwargs):
+    '''def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         find_id = kwargs.get('pk')
         context['mascotas'] = MFind.objects.filter(id=find_id) if find_id else MFind.objects.all()
+        return context'''
+    #Implementar filtrado
+    def get_context_data(self, **kwargs):
+        context = super(MEncontradaListView, self).get_context_data(**kwargs)
+        
+        # Obtener los valores de los filtros enviados por el usuario
+        lugar_encontrado = self.request.GET.get('lugar_encontrado')
+        tamano = self.request.GET.get('tamano')
+        pelo = self.request.GET.get('pelo')
+        
+        #!PRUEBA PARA SACAR MÁS DE UN REGISTRO AL FILTRAR
+        especie_id = kwargs.get('especie_id')
+        color_id = kwargs.get('color_id')
+        raza_id = kwargs.get('raza_id')
+
+        # Obtener todas las mascotas
+        mascotas = MFind.objects.all()
+
+        # Filtrar los objetos de MLost utilizando los filtros recibidos
+
+        if especie_id:
+            # Filtrar por especie seleccionada
+            mascotas = mascotas.filter(especie_id=especie_id)
+
+        if color_id:
+            # Filtrar por color seleccionado
+            mascotas = mascotas.filter(color__id=color_id)
+
+        if raza_id:
+            # Filtrar por raza seleccionada
+            mascotas = mascotas.filter(raza_id=raza_id)
+
+        if lugar_encontrado:
+            # Filtrar por lugar_encontrado escrito
+            mascotas = mascotas.filter(lugar_encontrado__icontains=lugar_encontrado)
+        if tamano:
+            # Filtrar por tamaño escrito
+            mascotas = mascotas.filter(tamano__icontains=tamano)
+        if pelo:
+            # Filtrar por pelo escrito
+            mascotas = mascotas.filter(pelo__icontains=pelo)
+
+        # Obtener todas las mascotas filtradas
+        context['mascotas_find'] = mascotas
+
         return context
 
 #-------------------------------- Recuperar mascota al clickar en una mascota de Panel
@@ -152,11 +197,42 @@ class MEncontradaDetailView(TemplateView):
 #!------------------------------------------------- AVISOS -----------------------------------------------
 class AvisoListView(TemplateView):
     template_name = "katapp/listado_avisos.html"
-    def get_context_data(self, *args, **kwargs):
+    '''def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         aviso_id = kwargs.get('pk')
         context['avisos'] = Aviso.objects.filter(id=aviso_id) if aviso_id else Aviso.objects.all()
+        return context'''
+    def get_context_data(self, **kwargs):
+        context = super(AvisoListView, self).get_context_data(**kwargs)
+
+        # Obtener los valores de los filtros enviados por el usuario
+        tipo_aviso = self.request.GET.get('tipo_aviso')
+        ubicacion = self.request.GET.get('ubicacion')
+
+        #!PRUEBA PARA SACAR MÁS DE UN REGISTRO AL FILTRAR
+        provincia_id = kwargs.get('provincia_id')
+
+        # Obtener todas los avisos
+        avisos = Aviso.objects.all()
+
+        # Filtrar los objetos de Aviso utilizando los filtros recibidos
+
+        if provincia_id:
+            # Filtrar por provincia seleccionada
+            avisos = avisos.filter(provincia_id=provincia_id)
+
+        if tipo_aviso:
+            # Filtrar por tipo_aviso escrito
+            avisos = avisos.filter(tipo_aviso__icontains=tipo_aviso)
+        if ubicacion:
+            # Filtrar por ubicacion escrito
+            avisos = avisos.filter(ubicacion__icontains=ubicacion)
+
+        # Obtener todas las mascotas filtradas
+        context['avisos'] = avisos
+
         return context
+
 
 #-------------------------------- Recuperar mascota al clickar en una mascota de Panel
 def aviso_detail_view(request,pk):
