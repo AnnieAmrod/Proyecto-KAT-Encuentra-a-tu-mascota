@@ -1,6 +1,7 @@
+{% load static %}
 <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow">
 
-  <a class="navbar-brand col-md-3 col-lg-2 px-3 ml-5" href="{% url 'panel' %}">KAT: Encuentra a tu mascota</a>
+  <a class="navbar-brand col-md-3 col-lg-2 px-3 ml-5"  id="id_txt" href="{% url 'panel' %}"><img src="{% static 'kat_imagotipo.png' %}"> KAT: Encuentra a tu mascota</a>
 
   <div class="navbar-nav me-3">
     <div class="nav-item text-nowrap d-flex">

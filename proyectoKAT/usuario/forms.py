@@ -25,7 +25,7 @@ class UsuarioRegistradoForm(forms.ModelForm):
                 ),
                 Div(
                     Div(Field('email'), css_class="mb-4"),
-                    Div(Field('telefono'), css_class="mb-3"),
+                    Div(Field('telefono'), css_class="mt-5 mt-md-0 mb-3"),
                     css_class="col-6"
                 ),
             ),

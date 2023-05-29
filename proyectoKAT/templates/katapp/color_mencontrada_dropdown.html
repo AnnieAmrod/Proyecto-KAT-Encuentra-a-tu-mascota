@@ -1,6 +1,6 @@
 <label class="h4" for="color">Color</label>
 <select id="color" name="color" class="form-select" onchange="redirectToSelectedOptionColor()">
-    <option selected disabled>Selecciona una color</option>
+    <option selected disabled>Selecciona un color</option>
     {% for color in colores %}
         <option value="{{ color.id }}">{{ color.nombre }}</option>
     {% endfor %}

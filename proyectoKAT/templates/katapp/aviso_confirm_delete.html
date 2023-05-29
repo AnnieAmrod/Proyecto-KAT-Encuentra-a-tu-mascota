@@ -6,6 +6,7 @@
         <p>¿Está seguro que quiere eliminar este aviso "{{ object }}"?</p>
         {{ form }}
         <input type="submit" value="Confirmar" class="btn">
+        <a href="{% url 'aviso_update' pk=aviso.pk %}" class="btn">Volver</a>
     </form>
 </div>
 {% endblock %}

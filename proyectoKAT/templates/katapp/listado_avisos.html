@@ -14,16 +14,17 @@
                 <h4>Tipo de aviso</h4>
                 <div class="form-group">
                     <label for="ubicacion">Introduce el tipo de aviso (Avispas/Alimento/Peligros):</label>
-                    <input type="text" name="tipo_aviso" placeholder="Tipo de aviso">
+                    <input id="id_filtros" type="text" name="tipo_aviso" placeholder="Tipo de aviso">
                 </div>
                 <hr>
                 <h4>Ubicación</h4>
                 <div class="form-group">
                     <label for="ubicacion">Introduce una ubicación:</label>
-                    <input type="text" name="ubicacion" placeholder="Ubicación">
+                    <input id="id_filtros" type="text" name="ubicacion" placeholder="Ubicación">
                 </div>
-
+                <br>
                 <button class="btn" type="submit">Filtrar</button>
+                <a class="btn" href="{% url 'aviso' %}">Borrar filtros</a>
             </form>
 
         </div>

@@ -14,6 +14,7 @@ div.container-fluid.fondo{
     margin: 0 auto;
 }
 
+/*!-------------- BARRA DE NAVEGACIÓN ----------*/
 header{
     background-color: #8C2986;
     z-index: 3;
@@ -24,7 +25,7 @@ header.menu{
 }
 
 header.menu a.nav-link{
-    padding: 15px;
+    padding: 20px;
     color: #592356;
 }
 
@@ -52,6 +53,7 @@ header.menu a.nav-link.active{
     color: #FFFFFF;
 }
 
+/*!------------- PANTALLA INICIO --------------*/
 .btn{
     background-color: #8C2986;
     color: #FFFFFF;
@@ -68,12 +70,6 @@ header.menu a.nav-link.active{
     background-color: #000000;
 }
 
-.card-img-top{
-    max-height: 240.94px;
-    object-fit: cover;
-    object-position: center;
-}
-
 div#navbarNav.collapse.navbar-collapse{
     font-weight: bold;
     font-size: 0.9em;
@@ -84,9 +80,28 @@ div#navbarNav.collapse.navbar-collapse{
     z-index: 1;
 }
 
+#id_perdida{
+    color: #FF64F5;
+}
+
+#id_encontrada{
+    color: #8C2986;
+}
+
+#id_alerta{
+    color: #592356;
+}
+
 .carousel {
     position: relative;
     z-index: 0;
+}
+
+/*!---------------- FORMULARIOS ----------------*/
+.card-img-top{
+    max-height: 288px;
+    object-fit: cover;
+    object-position: center;
 }
 
 #id_color{
@@ -175,6 +190,7 @@ a:link, a:visited, a:active {
     color: #FF64F5;
 }
 
+/*!------------- FOOTER ---------------*/
 footer{
     background-color: #8C2986;
     margin-top: 5%;
@@ -182,6 +198,16 @@ footer{
     bottom: 0;
     width: 100%;
     z-index: 3;
+}
+
+/*!-------------- COLOCACIÓN LISTADOS --------------*/
+@media (max-width: 425px){
+    img#id_logo{
+        width: 63px;;
+    }
+    a#id_txt{
+        font-size: medium;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1000px) {
@@ -244,8 +270,12 @@ input#id_email::placeholder, input#id_login::placeholder, input#id_password::pla
     color: #FFC4FC;
 }
 
-.enlace-allauth a{
+.enlace-allauth a, input#id_filtros::placeholder{
     color: #FF64F5;
+}
+
+input#id_filtros{
+    max-width: 100%;
 }
 
 .enlace-allauth:hover a{
